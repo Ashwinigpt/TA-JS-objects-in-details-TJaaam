@@ -1,93 +1,126 @@
 // Using function to create object
 
-function incrementProject(value = 1) {
-    this.score = this.score + value;
-    return this.score;
-};
-function decrementProject(value = 1){
-    this.score = this.score - value;
-    return this.score;
-};
-function changeName(name){
-    this.name = name;
-    return this.name;
-};
-function getProjects() {
-    this.score = this.score + value;
-    return this.score;
-};
-// Using Object.create (prototypal pattern)
-
-let userMethods = {
-    incrementProject: function(value = 1) {
-        this.score = this.score + value;
-        return this.score;
-    },
-    decrementProject: function (value = 1){
-        this.score = this.score - value;
-        return this.score;
-    },
-    changeName: function (name){
-        this.name = name;
-        return this.name;
-    },
-};
-
-function createUser(name, score = 0){
-    let user = Object.create(userMethods);
+function createUser(name, id, noOfProjects) {
+    let user = {};
     user.name = name;
-    user.score = score;
+    user.id = id;
+    user.noOfProjects = noOfProjects;
+
+    user.getProjects = function () {
+        return user.noOfProjects;
+    }
+    user.changeName = function (newName) {
+        let prevName = user.name;
+        user.name = newName;
+        return prevName;
+    }
+    user.incrementProject = function () {
+        user.noOfProjects += 1;
+        return noOfProjects;
+    }
+    user.decrementProject = function () {
+        user.noOfProjects -= 1;
+        return noOfProjects;
+    }
     return user;
 }
 
+let user1 = createUser('Ashwini', 1307, 8);
+let user2 = createUser('Vandana', 1213, 7);
+
+
+// Using Object.create (prototypal pattern)
+
+let userMethods = {
+    getProjects: function () {
+        return this.noOfProjects;
+    },
+    changeName: function (newName) {
+        let prevName = this.name;
+        this.name = newName;
+        return prevName;
+    },
+    incrementProject: function () {
+        this.noOfProjects += 1;
+        return noOfProjects;
+    },
+    decrementProject: function () {
+        this.noOfProjects -= 1;
+        return noOfProjects;
+    },
+};
+
+function createUser(name, id, noOfProjects) {
+    let user = Object.create(userMethods);
+    user.name = name;
+    user.id = id;
+    user.noOfProjects = noOfProjects;
+
+    return user;
+}
+
+let user1 = createUser('Ashwini', 1307, 8);
+let user2 = createUser('Vandana', 1213, 7);
+
 // Using Pseudoclassical Way
 
-function CreateUser(name, score = 0){
+function CreateUser(name, id, noOfProjects) {
     this.name = name;
-    this.score = score;
+    this.id = id;
+    this.noOfProjects = noOfProjects;
 }
 
 createUser.prototype = {
-    incrementProject: function(value = 1) {
-        this.score = this.score + value;
-        return this.score;
+    getProjects: function () {
+        return this.noOfProjects;
     },
-    decrementProject: function (value = 1){
-        this.score = this.score - value;
-        return this.score;
+    changeName: function (newName) {
+        let prevName = this.name;
+        this.name = newName;
+        return prevName;
     },
-    changeName: function (name){
-        this.name = name;
-        return this.name;
+    incrementProject: function () {
+        this.noOfProjects += 1;
+        return noOfProjects;
+    },
+    decrementProject: function () {
+        this.noOfProjects -= 1;
+        return noOfProjects;
     },
 }
 
-let user1 = new User('Ashwini', 8);
-let user2 = new User('Vandana');
+let user1 = new CreateUser('Ashwini', 1307, 8);
+let user2 = new CreateUser('Vandana', 1213, 7);
 
 // Using Class
 
 class User {
-    constructor (name, score){
+    constructor(name, id, noOfProjects) {
         this.name = name;
-        this.score = score;
+        this.id = id;
+        this.noOfProjects = noOfProjects;
+
     }
-    incrementProject(value = 1) {
-        this.score = this.score + value;
-        return this.score;
-    };
-    decrementProject(value = 1){
-        this.score = this.score - value;
-        return this.score;
-    };
-    changeName(name){
-        this.name = name;
-        return this.name;
-    };
+    getProjects() {
+        return this.noOfProjects;
+    }
+    changeName(newName) {
+        let prevName = this.name;
+        this.name = newName;
+        return prevName;
+    }
+    incrementProject() {
+        this.noOfProjects += 1;
+        return noOfProjects;
+    }
+    decrementProject() {
+        this.noOfProjects -= 1;
+        return noOfProjects;
+    }
 }
 
-let user1 = new User('Ashwini', 8);
-let user2 = new User('Vandana');
+let user1 = new CreateUser('Ashwini', 1307, 8);
+let user2 = new CreateUser('Vandana', 1213, 7);
 
 
 
