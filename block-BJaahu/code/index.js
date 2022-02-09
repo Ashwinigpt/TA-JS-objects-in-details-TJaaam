@@ -68,10 +68,10 @@ class Question {
 }
     isAnswerCorrect(index){
         return index === this.correctAnswerIndex;
-    },
+    }
     getCorrectAnswer(){
         return this.options[this.correctAnswerIndex];
-    },
+    }
 
 }
 
