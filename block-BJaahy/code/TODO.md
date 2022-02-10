@@ -4,9 +4,9 @@
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
 }
 ```
@@ -15,9 +15,9 @@ class Square {
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
     description(){
         alert `The square is ${this.width} x ${this.height}`;
@@ -29,9 +29,9 @@ class Square {
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
     description(){
         alert `The square is ${this.width} x ${this.height}`;
@@ -46,9 +46,9 @@ class Square {
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
     description(){
         alert `The square is ${this.width} x ${this.height}`;
@@ -66,9 +66,9 @@ class Square {
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
     description(){
         alert `The square is ${this.width} x ${this.height}`;
@@ -80,8 +80,9 @@ class Square {
         return this.width * this.height;
     }
     set area(value){
-        this.width = value;
-        this.height = value;
+        let side = Math.sqrt(value);
+        this.width = side;
+        this.height = side;
 
     }
 }
@@ -91,9 +92,9 @@ class Square {
 
 ```js
 class Square {
-    constructor(side = width, height){
-        this.width = width;
-        this.height = height;
+    constructor(side){
+        this.width = side;
+        this.height = side;
     }
     description(){
         alert `The square is ${this.width} x ${this.height}`;
@@ -109,15 +110,15 @@ class Square {
         this.height = value;
     }
     static isEqual(a, b){
-        return (a.width * a.height) === (a.height * a.width);
+        return a.area === b.area;
     }
 }
 ```
 - Create two instance of the `Square` class
 
 ```js
-let area1 = Square (25);
-let area2 = Square (35);
+let square1 = new Square (25);
+let square2 = new Square (35);
 ```
 
 - Check the `area` getter method on both square. Check the `area` property on one square more than 4 times.
@@ -160,10 +161,17 @@ class User {
         this.lastName = lastName;
     }
     get fullName(){
-        return this.firstName + " " + this.lastName;
+        return `${this.firstName} ${this.lastName}`;
     }
     set fullName(fullname){
-        return if(this.firstName + this.lastName === )
+        if(fullname.length < 5){
+            alert `Full name should be more than 5 characters`;
+        } else {
+            let firstName = fullname.split(' ')[0];
+            let lastName = fullname.split(' ')[1];
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
     }
 }
 ```
@@ -177,13 +185,20 @@ class User {
         this.lastName = lastName;
     }
     get fullName(){
-        return this.firstName + " " + this.lastName;
+        return `${this.firstName} ${this.lastName}`;
     }
     set fullName(fullname){
-        return if(this.firstName + this.lastName === )
+        if(fullname.length < 5){
+            alert `Full name should be more than 5 characters`;
+        } else {
+            let firstName = fullname.split(' ')[0];
+            let lastName = fullname.split(' ')[1];
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
     }
-    static nameContains(a, b){
-        return (a.firstName + a.lastName === String);
+    nameContains(string){
+        return `${this.firstName} ${this.lastName}`.includes(string);
     }
 }
 ```
@@ -191,8 +206,8 @@ class User {
 - Create two instance of the `User` class
 
 ```js
-let fullname1 = User ("Ashwini", "Gupta");
-let fullname2 = User ("Vandana", "Sah");
+let fullname1 = new User ("Ashwini", "Gupta");
+let fullname2 = new User ("Vandana", "Sah");
 ```
 
 - Check by using the `fullName` setter method with name bigger than 5 characters.
