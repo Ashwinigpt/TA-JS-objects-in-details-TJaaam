@@ -183,19 +183,18 @@ function userFactory(name, score) {
   return user;
 }
 
-var adminFunctionStore = userFactory('Eva', 5);
+var adminFunctionStore = Object.create(userFunctionStore);
 
 function adminFactory(name, score) {
-  let user = Object.create(sharePublicMessage);
-  user.type = 'Admin';
-  user.name = name;
-  user.score = score;
-  return user;
+  let obj = userFactory(name, score);
+  Object.setPrototypeOf(obj, adminFunctionStore);
+  obj.type = 'Admin';
+  return obj;
 }
 
-function sharePublicMessage(){
-  console.log('Welcome users!');
-}
+adminFunctionStore.sharePublicMessage = function() {
+  console.log('Welcome users!')
+};
 
 var adminFromFactory = adminFactory('Eva', 5);
 
