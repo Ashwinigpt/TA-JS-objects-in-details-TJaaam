@@ -5,7 +5,10 @@
 /*** CHALLENGE 1 of 1 ***/
 
 function makePerson(name, age) {
-  // add code here
+  let obj = {};
+  obj.name = name;
+  obj.age = age;
+  return obj;
 }
 
 var vicky = makePerson('Vicky', 24);
@@ -21,7 +24,9 @@ var vicky = makePerson('Vicky', 24);
 /*** CHALLENGE 1 of 3 ***/
 
 var personStore = {
-  // add code here
+  greet: function(){
+    console.log(`hello`);
+  }
 };
 
 // /********* Uncomment this line to test your work! *********/
@@ -30,7 +35,11 @@ var personStore = {
 /*** CHALLENGE 2 of 3 ***/
 
 function personFromPersonStore(name, age) {
-  // add code here
+  let obj = Object.create(personStore);
+  obj.name = name;
+  obj.age = age;
+
+  return obj;
 }
 
 var sandra = personFromPersonStore('Sandra', 26);
@@ -42,7 +51,24 @@ var sandra = personFromPersonStore('Sandra', 26);
 
 /*** CHALLENGE 3 of 3 ***/
 
-// add code here
+var personStore = {
+  greet: function(){
+    console.log(`hello`);
+  },
+  introduce: function(){
+    console.log(`Hi, my name is ${this.name}`);
+  }
+};
+
+function personFromPersonStore(name, age) {
+  let obj = Object.create(personStore);
+  obj.name = name;
+  obj.age = age;
+
+  return obj;
+}
+
+var sandra = personFromPersonStore('Sandra', 26);
 
 // sandra.introduce(); // -> Logs 'Hi, my name is Sandra'
 
@@ -53,7 +79,9 @@ var sandra = personFromPersonStore('Sandra', 26);
 /*** CHALLENGE 1 of 3 ***/
 
 function PersonConstructor() {
-  // add code here
+  this.greet = function(){
+    console.log(`hello`);
+  };
 }
 
 // /********* Uncomment this line to test your work! *********/
@@ -63,10 +91,16 @@ var simon = new PersonConstructor();
 /*** CHALLENGE 2 of 3 ***/
 
 function personFromConstructor(name, age) {
-  // add code here
+  this.name = name;
+  this.age = age;
 }
+personFromConstructor.prototype = {
+  greet: function(){
+    console.log(`hello`);
+  },
+} 
 
-var mike = personFromConstructor('Mike', 30);
+var mike = new personFromConstructor('Mike', 30);
 
 // /********* Uncomment these lines to test your work! *********/
 // console.log(mike.name); // -> Logs 'Mike'
@@ -74,7 +108,21 @@ var mike = personFromConstructor('Mike', 30);
 // mike.greet(); //-> Logs 'hello'
 
 /*** CHALLENGE 3 of 3 ***/
-// add code here
+
+function personFromConstructor(name, age) {
+  this.name = name;
+  this.age = age;
+}
+personFromConstructor.prototype = {
+  greet: function(){
+    console.log(`hello`);
+  },
+  introduce: function(){
+    console.log(`Hi, my name is ${this.name}`);
+  }
+} 
+
+var mike = new personFromConstructor('Mike', 30);
 
 // mike.introduce(); // -> Logs 'Hi, my name is Mike'
 
@@ -82,23 +130,35 @@ var mike = personFromConstructor('Mike', 30);
                         USING ES6 CLASSES
 ****************************************************************/
 
-/*** CHALLENGE 1 of 3 ***/
+/*** CHALLENGE 1 of 2 ***/
 
 class PersonClass {
-  constructor() {
-    // add code here
+  constructor(name) {
+    this.name = name;
   }
-
-  // add code here
+  greet(){
+    console.log(`hello`);
+  }
 }
 
 // /********* Uncomment this line to test your work! *********/
 var george = new PersonClass();
 // george.greet(); // -> Logs 'hello'
 
-/*** CHALLENGE 2 of 3 ***/
+/*** CHALLENGE 2 of 2 ***/
 
-// add code here
+class DeveloperClass extends PersonClass{
+  constructor(name){
+    super(name);
+    this.name = name;
+  }
+  greet(){
+    console.log(`hello`);
+  }
+  introduce(){
+    console.log(`Hello World, my name is ${this.name}`);
+  }
+}
 
 // /********* Uncomment these lines to test your work! *********/
 // var thai = new DeveloperClass('Thai', 32);
@@ -123,13 +183,19 @@ function userFactory(name, score) {
   return user;
 }
 
-var adminFunctionStore /* Put code here */;
+var adminFunctionStore = userFactory('Eva', 5);
 
 function adminFactory(name, score) {
-  // Put code here
+  let user = Object.create(sharePublicMessage);
+  user.type = 'Admin';
+  user.name = name;
+  user.score = score;
+  return user;
 }
 
-/* Put code here for a method called sharePublicMessage*/
+function sharePublicMessage(){
+  console.log('Welcome users!');
+}
 
 var adminFromFactory = adminFactory('Eva', 5);
 
