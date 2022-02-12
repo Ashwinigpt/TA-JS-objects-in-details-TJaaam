@@ -3,7 +3,9 @@
 `myMap` will behave similar to how the `Array.map` works. To test the implementation use the code below.
 */
 
-// myMap function goes here
+function myMap(){
+  
+}
 
 // Test the myMap function you created above
 
