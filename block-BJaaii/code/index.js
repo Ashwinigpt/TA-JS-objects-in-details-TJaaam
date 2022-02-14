@@ -16,8 +16,7 @@ class Stack {
         return this.stack[index];
     }
     reverse(){
-        this.stack.reverse();
-        return this.stack;
+        return this.stack.reverse();
     }
     isEmpty(){
         return !(this.stack.length > 0);
@@ -25,7 +24,7 @@ class Stack {
     displayStack(){
         return this.stack.join(" ");
     }
-    length(){
+    get length(){
         return this.stack.length;
     }
 }
@@ -44,7 +43,7 @@ class Queue {
         this.queue.shift();
         return this.queue;
     }
-    peek(index = this.queue.length){
+    peek(index = 0){
         return this.queue[index];
     }
     isEmpty(){
@@ -53,7 +52,7 @@ class Queue {
     displayQueue(){
         return this.queue.join(" ");
     }
-    length(){
+    get length(){
         return this.queue.length;
     }
 }
