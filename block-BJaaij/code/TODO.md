@@ -15,6 +15,24 @@ Book class will have the following methods:
 
 - `markBookAsRead` when called will change the `isRead` property on the book to be `true`. It will also change the `finishedDate` to be the `Date.now()` when this function is called.
 
+
+```js
+class Book {
+    constructor(title, category, author, isRead, finishedData){
+        this.title = title;
+        this.category = category;
+        this.author = author;
+        this.isRead = false;
+        this.finishedData = finishedData;
+    }
+    markBookAsRead (){
+        return this.isRead = true;
+
+    }
+    
+}
+```
+
 #### BookList should have the following properties:
 
 1. An array of all the Books
@@ -29,3 +47,27 @@ Book class will have the following methods:
 - [] `changeCurrentBook` should accept one parameter and update the current index.
 
 After creating the Book and BookList class create 5 book object and add it to list. Test all the methods in Book and BookList class.
+
+```js
+class BookList (){
+    constructor (array, cv){
+        this.array = array;
+        this.cb = cb;
+    }
+    add(){
+
+    }
+    getCurrentBook(){
+
+    }
+    getNextBook(){
+
+    }
+    getPrevBook(){
+
+    }
+    changeCurrentBook(){
+        
+    }
+}
+```
