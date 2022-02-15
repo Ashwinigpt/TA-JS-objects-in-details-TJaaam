@@ -1,58 +1,68 @@
-class BookList{
-    constructor(root, list = []){
-        this.books = list;
-        this.root = root;
+let form = document.querySelector('form');
+let bookListRoot = document.querySelector('.book_list');
+
+const nameElm = form.elements.title;
+const authorElm = form.elements.author;
+const imageElm = form.elements.image;
+
+class Book {
+    constructor(name, auhtor, img){
+        this.name = name;
+        this.author = auhtor;
+        this.img = img;
+        this.isRead = false;
     }
-    add(text, author, url){
-        let book = new Book(text, author, url);
+
+    toggleIsRead(){
+        this.isRead = !this.isRead;
+    }
+}
+
+
+class BookList {
+    constructor(books = []){
+        this.books = books;
+    }
+    addBook(name, author, img){
+        let book = new Book(name, author, img);
         this.books.push(book);
         this.createUI();
-        return this.books.length;
-    }
-    handleDelete(id){
-        let index = this.books.findIndex((book) => book.id === id);
-        this.books.splice(index, 1);
-        this.createUI;
-        return this.books.length;
     }
     createUI(){
-        this.root.innerHtml = "";
+        bookListRoot.innerHTML = "";
         this.books.forEach(book => {
-            let ui = book.createUI();
-            ui.querySelector("span").addEventListener("click", this.handleDelete.bind(this, book.id));
-        this.root.append(ui);
-        });
+            let li = document.createElement("li");
+            let img = document.createElement("img");
+            img.src = book.img;
+            let h2 = document.createElement("h4");
+            h2.innerText = book.name;
+            let span = document.createElement("p");
+            span.innerText = book.author;
+            let button = document.createElement("button");
+            button.innerText = book.isRead ? "Completed!" : "Mark As Read" ;
+            button.addEventListener("click", () => {
+                book.toggleIsRead();
+                this.createUI;
+            })
+            li.append(img, h2, span, button);
+            bookListRoot.append(li);
+        })
     }
 }
 
-class Book{
-    constructor(text, author, url){
-        this.text = text;
-        this.author = author;
-        this.url = url;
-        this.isDone = false;
-        this.id = `id-${Date.now()}`
-    }
-    handleCheck(){
-        this.isDone = !this.isDone;
-        this.createUI();
-    }
-    createUI(){
-        let li = document.createElement("li");
-        let input = document.createElement("input");
-        input.type = "checkbox";
-        input.checked = this.isDone;
-        input.addEventListener("click", this.handleCheck.bind(this));
-        let p = document.createElement("p");
-        p.innerText = this.text;
-        let span = document.createElement("span");
-        span.innerText = "❌";
-        span.addEventListener("click", handleDelete);
-        li.append(input, p ,span);
-        return li;
-    }
+let library = new BookList();
+
+
+
+function handleSubmit(){
+    event.preventDefault();
+    const name = nameElm.value;
+    const author = authorElm.value;
+    console.log(name, author);
+    library.addBook(name, author);
+    nameElm.value = "";
+    authorElm.value = "";
+    imageElm.value = "";
 }
 
-let myBook = new BookList(document.querySelector(".books"));
-myBook.add("Harry Potter", "J.K. Rowling", 768756598);
-myBook.add("A Passage to India", "E.M. Foster", 987868798);
+form.addEventListener('submit', handleSubmit)
