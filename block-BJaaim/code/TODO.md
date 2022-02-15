@@ -15,7 +15,7 @@ METHODS:
 
 - isCorrect(answer)
 
-Check if the given answer is correct or not. It will accept one answer and return `true` is the answer is correct otherwise false.
+Check if the given answer is correct or not. It will accept one answer and return `true` if the answer is correct otherwise false.
 
 - getCorrectAnswer()
   This method will return the correct answer of the question.
@@ -23,6 +23,25 @@ Check if the given answer is correct or not. It will accept one answer and retur
 - createUI (this will create the layout of a single question)
 
 This method will decide how the UI of a question look like. Calling this function should add the UI in the DOM.
+
+```js
+class Question {
+  constructor(title, options, correctAnswer){
+    this.title = title;
+    this.options = options;
+    this.correctAnswer = correctAnswer;
+  }
+  isCorrect(answer){
+    
+  }
+  getCorrectAnswer(){
+    return this.correctAnswer;
+  }
+  createUI(){
+
+  }
+}
+```
 
 ### Make quiz class with these data and properties
 
@@ -43,3 +62,23 @@ METHOD:
   This will create the ui of the whole app.
 - updateScore
   This method will update the score.
+
+```js
+class Quiz {
+  constructor(){
+    this.allQuestions = [];
+    this.activeIndex = 0;
+    this.score = score;
+  }
+  nextQuestion(){
+    this.activeIndex = this.activeIndex + 1;
+    return this.allQuestions[this.activeIndex];
+  }
+  createUI(){
+
+  }
+  updateScore(){
+    return this.score;
+  }
+}
+```
